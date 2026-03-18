@@ -1,0 +1,16 @@
+{
+  "name": "APFinanceiro",
+  "short_name": "APFinanceiro",
+  "description": "Dashboard inteligente do mercado imobiliário brasileiro",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "192x192",
+      "type": "image/x-icon"
+    }
+  ]
+}
