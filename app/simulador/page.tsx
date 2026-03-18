@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { AlertCircle, Calculator } from "lucide-react";
+import { AlertCircle, Calculator, Settings2 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 
 async function fetchIndicators() {
   const res = await fetch("/api/indicators");
@@ -66,7 +67,7 @@ export default function SimuladorPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Simuladores</h1>
+        <h1 className="text-3xl md:text-4xl heading-modern pb-1">Simuladores</h1>
         <p className="text-muted-foreground">
           Ferramentas interativas utilizando os indicadores de mercado em tempo real.
         </p>
@@ -80,12 +81,18 @@ export default function SimuladorPage() {
         
         {/* TAB 1: REAJUSTE DE ALUGUEL */}
         <TabsContent value="reajuste" className="mt-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Calculadora de Reajuste Anual</CardTitle>
-              <CardDescription>
-                Atualize valores de aluguel ou contratos baseando-se no IGP-M ou IPCA acumulado de 12 meses.
-              </CardDescription>
+          <Card className="card-modern relative">
+            <CardHeader className="flex flex-row items-start justify-between">
+              <div>
+                <CardTitle>Calculadora de Reajuste Anual</CardTitle>
+                <CardDescription className="mt-1">
+                  Atualize valores de aluguel ou contratos baseando-se no IGP-M ou IPCA acumulado de 12 meses.
+                </CardDescription>
+              </div>
+              <div className="flex items-center gap-2 bg-muted/30 p-2 px-3 rounded-full border border-border/40">
+                <Label htmlFor="advanced-switch" className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground mr-1">Avançado</Label>
+                <Switch id="advanced-switch" className="scale-75 origin-right data-[state=checked]:bg-primary" />
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
@@ -135,12 +142,18 @@ export default function SimuladorPage() {
 
         {/* TAB 2: FINANCIAMENTO */}
         <TabsContent value="financiamento" className="mt-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Simulador de Financiamento</CardTitle>
-              <CardDescription>
-                Simule parcelas pelo método PRICE projetando juros balizados pela Selic atual ({selicAtual}%).
-              </CardDescription>
+          <Card className="card-modern relative">
+            <CardHeader className="flex flex-row items-start justify-between">
+              <div>
+                <CardTitle>Simulador de Financiamento</CardTitle>
+                <CardDescription className="mt-1">
+                  Simule parcelas pelo método PRICE projetando juros balizados pela Selic atual ({selicAtual}%).
+                </CardDescription>
+              </div>
+              <div className="flex items-center gap-2 bg-muted/30 p-2 px-3 rounded-full border border-border/40">
+                <Label htmlFor="amort-switch" className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground mr-1">Modo SAC</Label>
+                <Switch id="amort-switch" className="scale-75 origin-right data-[state=checked]:bg-primary" />
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid gap-4 md:grid-cols-3">

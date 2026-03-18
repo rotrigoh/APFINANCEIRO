@@ -6,7 +6,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Info, AlertCircle, TrendingUp, Landmark, LineChart as LineChartIcon } from "lucide-react";
 import dynamic from "next/dynamic";
-import { ThreeGlobe } from "@/components/ui/three-globe";
 import { motion } from "framer-motion";
 
 const IPCAvsINCCChart = dynamic(() => import("@/components/charts/premium-charts").then(mod => mod.IPCAvsINCCChart), { ssr: false });
@@ -27,15 +26,13 @@ export default function Home() {
 
   return (
     <div className="space-y-8 relative">
-      {/* Background 3D Object Injection */}
-      <ThreeGlobe />
 
       <motion.div 
         initial={{ opacity: 0, y: -20 }} 
         animate={{ opacity: 1, y: 0 }} 
         className="flex flex-col gap-3 relative z-10"
       >
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/60">
+        <h1 className="text-4xl md:text-5xl heading-modern pb-1">
           Inteligência de Mercado
         </h1>
         <p className="text-muted-foreground text-lg max-w-2xl">
@@ -53,7 +50,7 @@ export default function Home() {
 
       {/* Grid de Cards Resumo Micro-interativos */}
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4 relative z-10">
-        <Card className="glass-panel group hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
+        <Card className="card-modern group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-semibold tracking-wide">Selic Meta</CardTitle>
             <div className="p-2 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
@@ -61,14 +58,19 @@ export default function Home() {
             </div>
           </CardHeader>
           <CardContent>
-            {isLoading ? <Skeleton className="h-10 w-20 mb-1" /> : <div className="text-3xl font-extrabold tracking-tight">{data?.selic}% <span className="text-sm text-foreground/50 font-medium">a.a</span></div>}
+            {isLoading ? <Skeleton className="h-10 w-20 mb-1" /> : (
+              <div className="flex items-center gap-2">
+                <div className="text-3xl font-extrabold tracking-tight">{data?.selic}% <span className="text-sm text-foreground/50 font-medium">a.a</span></div>
+                <div className="px-1.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500 text-[10px] font-bold border border-emerald-500/20">↓ -0.25 p.p</div>
+              </div>
+            )}
             <p className="text-xs text-muted-foreground mt-2 font-medium">
               Taxa Básica de Juros atual
             </p>
           </CardContent>
         </Card>
 
-        <Card className="glass-panel group hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
+        <Card className="card-modern group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-semibold tracking-wide">IPCA</CardTitle>
              <div className="p-2 bg-amber-500/10 rounded-full group-hover:bg-amber-500/20 transition-colors">
@@ -76,14 +78,19 @@ export default function Home() {
             </div>
           </CardHeader>
           <CardContent>
-            {isLoading ? <Skeleton className="h-10 w-20 mb-1" /> : <div className="text-3xl font-extrabold tracking-tight">{data?.ipca12m}% <span className="text-sm text-foreground/50 font-medium">12m</span></div>}
+            {isLoading ? <Skeleton className="h-10 w-20 mb-1" /> : (
+              <div className="flex items-center gap-2">
+                <div className="text-3xl font-extrabold tracking-tight">{data?.ipca12m}% <span className="text-sm text-foreground/50 font-medium">12m</span></div>
+                <div className="px-1.5 py-0.5 rounded-md bg-rose-500/10 text-rose-500 text-[10px] font-bold border border-rose-500/20">↑ +0.12%</div>
+              </div>
+            )}
             <p className="text-xs text-muted-foreground mt-2 font-medium">
               Inflação oficial acumulada
             </p>
           </CardContent>
         </Card>
 
-        <Card className="glass-panel group hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
+        <Card className="card-modern group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-semibold tracking-wide">IGP-M</CardTitle>
              <div className="p-2 bg-rose-500/10 rounded-full group-hover:bg-rose-500/20 transition-colors">
@@ -91,14 +98,19 @@ export default function Home() {
             </div>
           </CardHeader>
           <CardContent>
-             {isLoading ? <Skeleton className="h-10 w-20 mb-1" /> : <div className="text-3xl font-extrabold tracking-tight">{data?.igpm12m}% <span className="text-sm text-foreground/50 font-medium">12m</span></div>}
+             {isLoading ? <Skeleton className="h-10 w-20 mb-1" /> : (
+              <div className="flex items-center gap-2">
+                <div className="text-3xl font-extrabold tracking-tight">{data?.igpm12m}% <span className="text-sm text-foreground/50 font-medium">12m</span></div>
+                <div className="px-1.5 py-0.5 rounded-md bg-muted text-muted-foreground text-[10px] font-bold border border-border">Estável</div>
+              </div>
+             )}
             <p className="text-xs text-muted-foreground mt-2 font-medium">
               Inflação de contratos e aluguéis
             </p>
           </CardContent>
         </Card>
 
-        <Card className="glass-panel group hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
+        <Card className="card-modern group">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-semibold tracking-wide">INCC-M</CardTitle>
             <div className="p-2 bg-emerald-500/10 rounded-full group-hover:bg-emerald-500/20 transition-colors">
@@ -106,7 +118,12 @@ export default function Home() {
             </div>
           </CardHeader>
           <CardContent>
-             {isLoading ? <Skeleton className="h-10 w-20 mb-1" /> : <div className="text-3xl font-extrabold tracking-tight">{data?.incc12m}% <span className="text-sm text-foreground/50 font-medium">12m</span></div>}
+             {isLoading ? <Skeleton className="h-10 w-20 mb-1" /> : (
+              <div className="flex items-center gap-2">
+                <div className="text-3xl font-extrabold tracking-tight">{data?.incc12m}% <span className="text-sm text-foreground/50 font-medium">12m</span></div>
+                <div className="px-1.5 py-0.5 rounded-md bg-rose-500/10 text-rose-500 text-[10px] font-bold border border-rose-500/20">↑ +0.31%</div>
+              </div>
+             )}
             <p className="text-xs text-muted-foreground mt-2 font-medium">
               Custo Nacional da Construção
             </p>
@@ -117,7 +134,7 @@ export default function Home() {
       <div className="grid gap-6 md:grid-cols-7 relative z-10 w-full mb-8">
         
         {/* Painel Gráfico Elegante */}
-        <Card className="col-span-full md:col-span-4 lg:col-span-5 glass-panel border border-border/50 shadow-md">
+        <Card className="col-span-full md:col-span-4 lg:col-span-5 card-modern shadow-md">
            <CardHeader className="pb-2">
             <CardTitle className="text-xl">Telemetria de Indexadores</CardTitle>
             <CardDescription>
@@ -148,7 +165,7 @@ export default function Home() {
           </CardContent>
         </Card>
         
-        <Card className="col-span-full md:col-span-3 lg:col-span-2 glass-panel border border-border/50 bg-primary/5">
+        <Card className="col-span-full md:col-span-3 lg:col-span-2 card-modern bg-primary/5">
           <CardHeader>
             <CardTitle className="text-xl text-primary">Inteligência Competitiva</CardTitle>
             <CardDescription>

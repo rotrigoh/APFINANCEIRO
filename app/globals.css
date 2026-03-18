@@ -82,6 +82,35 @@
   }
 }
 
+@layer components {
+  .heading-modern {
+    @apply font-extrabold tracking-tight text-transparent bg-clip-text;
+    background-image: linear-gradient(
+      110deg,
+      hsl(var(--foreground) / 0.85) 35%,
+      hsl(var(--foreground)) 45%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--foreground)) 55%,
+      hsl(var(--foreground) / 0.85) 65%
+    );
+    background-size: 300% 100%;
+    animation: shiny-glow 6s linear infinite;
+  }
+  
+  .card-modern {
+    @apply bg-background/80 backdrop-blur-md border border-border/50 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:scale-[1.01];
+  }
+}
+
+@keyframes shiny-glow {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
 .glass-panel {
   @apply bg-background/80 backdrop-blur-md border border-border shadow-sm;
 }

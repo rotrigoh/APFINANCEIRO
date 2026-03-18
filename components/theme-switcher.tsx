@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Settings, Check, Monitor, Moon, Sun } from "lucide-react";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 const PRESET_COLORS = [
   { name: "Blue", value: "221.2 83.2% 53.3%", hex: "#3b82f6" },
@@ -81,6 +82,20 @@ export function ThemeSwitcher() {
                   {currentColor === c.value && <Check className="h-4 w-4 text-white drop-shadow-md" />}
                 </button>
               ))}
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <Label className="text-xs uppercase font-bold text-muted-foreground tracking-wider">Interface</Label>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between p-2 px-3 bg-muted/40 rounded-lg border border-border/50">
+                 <Label htmlFor="anim-switch" className="text-sm font-medium cursor-pointer">Animações Dinâmicas</Label>
+                 <Switch id="anim-switch" defaultChecked className="scale-75 origin-right data-[state=checked]:bg-primary" />
+              </div>
+              <div className="flex items-center justify-between p-2 px-3 bg-muted/40 rounded-lg border border-border/50">
+                 <Label htmlFor="compact-switch" className="text-sm font-medium cursor-pointer">Modo Compacto</Label>
+                 <Switch id="compact-switch" className="scale-75 origin-right data-[state=checked]:bg-primary" />
+              </div>
             </div>
           </div>
         </div>

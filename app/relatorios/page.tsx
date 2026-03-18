@@ -47,7 +47,7 @@ export default function RelatoriosPage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto print:max-w-full">
       <div className="flex flex-col gap-2 print:hidden">
-        <h1 className="text-3xl font-bold tracking-tight">Relatórios e Exportação</h1>
+        <h1 className="text-3xl md:text-4xl heading-modern pb-1">Relatórios e Exportação</h1>
         <p className="text-muted-foreground">
           Gere arquivos em formato CSV ou imprima nativamente (PDF) o resumo executivo atual.
         </p>
@@ -61,7 +61,7 @@ export default function RelatoriosPage() {
       )}
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 print:hidden">
-        <Card className="flex flex-col">
+        <Card className="flex flex-col card-modern">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2"><FileText className="h-5 w-5"/> Exportar Dados Brutos</CardTitle>
             <CardDescription>Baixe a série histórica dos últimos 12 meses em CSV (compatível com Excel).</CardDescription>
@@ -76,7 +76,7 @@ export default function RelatoriosPage() {
           </CardFooter>
         </Card>
 
-        <Card className="flex flex-col">
+        <Card className="flex flex-col card-modern">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2"><Printer className="h-5 w-5"/> Imprimir Resumo Exxecutivo</CardTitle>
             <CardDescription>Gere um PDF ou imprima com visual formatado para papel contendo a síntese atual.</CardDescription>

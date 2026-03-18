@@ -43,7 +43,7 @@ export default function NoticiasPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Radar & Notícias</h1>
+        <h1 className="text-3xl md:text-4xl heading-modern pb-1">Radar & Notícias</h1>
         <p className="text-muted-foreground">
           Acompanhe as últimas movimentações do mercado e os insights gerados por nossa Inteligência Artificial.
         </p>
@@ -58,7 +58,7 @@ export default function NoticiasPage() {
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {isLoading && Array.from({ length: 6 }).map((_, i) => (
-          <Card key={i} className="flex flex-col">
+          <Card key={i} className="flex flex-col card-modern">
             <CardHeader className="space-y-2 pb-2">
               <Skeleton className="h-4 w-20 mb-2" />
               <Skeleton className="h-5 w-full" />
@@ -71,7 +71,7 @@ export default function NoticiasPage() {
         ))}
 
         {!isLoading && noticias?.map((item) => (
-          <Card key={item.id} className="flex flex-col hover:border-primary/50 transition-colors group">
+          <Card key={item.id} className="flex flex-col card-modern group cursor-pointer">
             <CardHeader className="pb-3 flex-1">
               <div className="flex justify-between items-start mb-2">
                 <Badge variant="outline" className={getBadgeColor(item.categoria)}>

@@ -22,7 +22,7 @@ export default function IndicadoresPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Indicadores Detalhados</h1>
+        <h1 className="text-3xl md:text-4xl heading-modern pb-1">Indicadores Detalhados</h1>
         <p className="text-muted-foreground">
           Análise aprofundada do IPCA, IGP-M e INCC-M nos últimos 12 meses.
         </p>
@@ -36,7 +36,7 @@ export default function IndicadoresPage() {
       )}
 
       {/* Gráfico Detalhado Maior */}
-      <Card>
+      <Card className="card-modern">
         <CardHeader>
           <CardTitle>Histórico Comparativo</CardTitle>
           <CardDescription>
@@ -53,7 +53,7 @@ export default function IndicadoresPage() {
       </Card>
 
       {/* Tabela de Dados Livres */}
-      <Card>
+      <Card className="card-modern overflow-hidden">
         <CardHeader>
           <CardTitle>Dados Brutos Mês a Mês</CardTitle>
           <CardDescription>Variação mensal reportada (%)</CardDescription>
