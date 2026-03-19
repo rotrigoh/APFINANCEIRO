@@ -29,27 +29,32 @@ export function CircularCursor() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: `
-        @media (min-width: 768px) {
-          body * { cursor: none !important; }
+        html, body, * { 
+          cursor: none !important; 
+        }
+        /* Garantir que o cursor padrão não apareça em hover de links/botões */
+        a, button, [role="button"] {
+          cursor: none !important;
         }
       `}} />
-      <div className="hidden md:block pointer-events-none z-[9999]">
+      <div className="fixed inset-0 pointer-events-none z-[2147483647]">
         {/* Ponto Rápido Central */}
         <motion.div
-          className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_hsl(var(--primary))]"
+          className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_hsl(var(--primary))] z-[2147483647]"
           animate={{ x: mousePosition.x - 4, y: mousePosition.y - 4 }}
           transition={{ type: "tween", ease: "linear", duration: 0 }}
         />
         {/* Aro Extensível Smooth */}
         <motion.div
-          className="fixed top-0 left-0 rounded-full border border-primary/50 bg-primary/5 backdrop-blur-[1px]"
+          className="fixed top-0 left-0 rounded-full border-2 border-primary/40 bg-primary/10 backdrop-blur-[2px] z-[2147483647]"
           animate={{
-            x: mousePosition.x - (isHovering ? 24 : 16),
-            y: mousePosition.y - (isHovering ? 24 : 16),
-            width: isHovering ? 48 : 32,
-            height: isHovering ? 48 : 32,
+            x: mousePosition.x - (isHovering ? 28 : 18),
+            y: mousePosition.y - (isHovering ? 28 : 18),
+            width: isHovering ? 56 : 36,
+            height: isHovering ? 56 : 36,
+            scale: isHovering ? 1.1 : 1,
           }}
-          transition={{ type: "spring", stiffness: 180, damping: 18, mass: 0.5 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20, mass: 0.5 }}
         />
       </div>
     </>
