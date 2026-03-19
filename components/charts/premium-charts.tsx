@@ -1,7 +1,25 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect, useRef } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+
+const useChartWidth = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setWidth(entry.contentRect.width);
+      }
+    });
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, width };
+};
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -28,7 +46,8 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function IPCAvsINCCChart({ history }: { history: any }) {
-  if (!history?.ipca) return null;
+  const { ref, width } = useChartWidth();
+  if (!history?.ipca) return <div className="h-[320px] flex items-center justify-center text-muted-foreground">Sem dados disponíveis</div>;
   const data = history.ipca.map((item: any, i: number) => ({
     name: item.data,
     IPCA: parseFloat(item.valor),
@@ -36,9 +55,9 @@ export function IPCAvsINCCChart({ history }: { history: any }) {
   })).reverse();
 
   return (
-    <div className="w-full h-full min-h-[320px] pt-4">
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+    <div ref={ref} className="relative w-full h-[320px] pt-4 overflow-hidden">
+      {width > 0 && (
+        <AreaChart width={width} height={300} data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           <defs>
             <linearGradient id="colorIPCA" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.5}/>
@@ -56,13 +75,14 @@ export function IPCAvsINCCChart({ history }: { history: any }) {
           <Area type="monotone" dataKey="INCC" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorINCC)" />
           <Area type="monotone" dataKey="IPCA" stroke="hsl(var(--primary))" strokeWidth={3} fillOpacity={1} fill="url(#colorIPCA)" />
         </AreaChart>
-      </ResponsiveContainer>
+      )}
     </div>
   );
 }
 
 export function SelicVsFinanciamentoChart({ history, selicAtual }: { history: any, selicAtual: string }) {
-  if (!history?.ipca) return null;
+  const { ref, width } = useChartWidth();
+  if (!history?.ipca) return <div className="h-[320px] flex items-center justify-center text-muted-foreground">Sem dados disponíveis</div>;
   
   const selicNum = parseFloat(selicAtual || "10.5");
   const data = history.ipca.map((item: any, i: number) => {
@@ -77,9 +97,9 @@ export function SelicVsFinanciamentoChart({ history, selicAtual }: { history: an
   }).reverse();
 
   return (
-    <div className="w-full h-full min-h-[320px] pt-4">
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+    <div ref={ref} className="relative w-full h-[320px] pt-4 overflow-hidden">
+      {width > 0 && (
+        <AreaChart width={width} height={300} data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           <defs>
             <linearGradient id="colorSelic" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.5}/>
@@ -97,13 +117,14 @@ export function SelicVsFinanciamentoChart({ history, selicAtual }: { history: an
           <Area type="monotone" dataKey="Financiamento" stroke="#ec4899" strokeWidth={3} fillOpacity={1} fill="url(#colorFin)" />
           <Area type="monotone" dataKey="Selic" stroke="#f59e0b" strokeWidth={3} fillOpacity={1} fill="url(#colorSelic)" />
         </AreaChart>
-      </ResponsiveContainer>
+      )}
     </div>
   );
 }
 
 export function FipeZapChart({ history }: { history: any }) {
-  if (!history?.ipca) return null;
+  const { ref, width } = useChartWidth();
+  if (!history?.ipca) return <div className="h-[320px] flex items-center justify-center text-muted-foreground">Sem dados disponíveis</div>;
   
   const data = history.ipca.map((item: any, i: number) => {
     const inflacao = parseFloat(item.valor);
@@ -116,9 +137,9 @@ export function FipeZapChart({ history }: { history: any }) {
   }).reverse();
 
   return (
-    <div className="w-full h-full min-h-[320px] pt-4">
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+    <div ref={ref} className="relative w-full h-[320px] pt-4 overflow-hidden">
+      {width > 0 && (
+        <AreaChart width={width} height={300} data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           <defs>
             <linearGradient id="colorFipe" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.5}/>
@@ -136,7 +157,7 @@ export function FipeZapChart({ history }: { history: any }) {
           <Area type="monotone" dataKey="FipeZap (Venda)" stroke="#8b5cf6" strokeWidth={3} fillOpacity={1} fill="url(#colorFipe)" />
           <Area type="monotone" dataKey="IPCA" stroke="#64748b" strokeWidth={2} strokeDasharray="5 5" fillOpacity={1} fill="url(#colorInflacao)" />
         </AreaChart>
-      </ResponsiveContainer>
+      )}
     </div>
   );
 }

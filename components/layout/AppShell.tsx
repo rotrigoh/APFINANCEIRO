@@ -120,7 +120,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
               return isCollapsed ? (
                 <Tooltip key={item.name}>
-                  {/* @ts-ignore */}
                   <TooltipTrigger asChild>
                     {linkContent}
                   </TooltipTrigger>

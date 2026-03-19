@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/providers";
 import { PWARegister } from "@/components/pwa-register";
 import { AppShell } from "@/components/layout/AppShell";
+import { CircularCursor } from "@/components/ui/circular-cursor";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -37,6 +38,7 @@ export default function RootLayout({
         className={`${roboto.variable} antialiased font-sans`}
       >
         <Providers>
+          <CircularCursor />
           <AppShell>{children}</AppShell>
           <PWARegister />
         </Providers>

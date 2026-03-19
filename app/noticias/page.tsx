@@ -1,7 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { SpotlightCard as Card } from "@/components/ui/spotlight-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Bot, AlertCircle, Clock } from "lucide-react";
